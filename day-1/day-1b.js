@@ -30,6 +30,20 @@ for (let index = 0; index < slidingArray.length; index++) {
   if (element <= previous) otherCount++;
 }
 
+// /----------------------------------------------------------------------------------
+
+// why say lot word when few word do trick
+let totalIncreasing = 0;
+for (let index = 0; index < array.length; index++) {
+  const element = array[index];
+  if (index < 3) {
+    continue;
+  }
+  if (parseInt(array[index]) > parseInt(array[index - 3])) {
+    totalIncreasing++;
+  }
+}
+
 // sanity check
 
 console.log("Legnth of array " + array.length);
@@ -40,3 +54,6 @@ console.log("total increasing: " + count);
 console.log("total: " + slidingArray.length);
 console.log("less that or equal: " + otherCount);
 console.log("added together: " + (count + otherCount));
+
+console.log("---------------------------------------------------");
+console.log("less code answer: " + totalIncreasing);
