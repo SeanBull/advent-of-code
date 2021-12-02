@@ -20,18 +20,37 @@ for (let index = 0; index < directions.length; index++) {
 //     It increases your depth by your aim multiplied by X.
 
 // finding the final coordinates
+// for (let index = 0; index < instructions.length; index++) {
+//   const direction = instructions[index][0];
+//   const size = parseInt(instructions[index][1]);
+//   if (direction === "up") {
+//     aim -= size;
+//   }
+//   if (direction === "down") {
+//     aim += size;
+//   }
+//   if (direction === "forward") {
+//     horizontalCoor += size;
+//     verticalCoor += size * aim;
+//   }
+// }
+
+// tryiong switch cases which also works
+
 for (let index = 0; index < instructions.length; index++) {
   const direction = instructions[index][0];
   const size = parseInt(instructions[index][1]);
-  if (direction === "up") {
-    aim -= size;
-  }
-  if (direction === "down") {
-    aim += size;
-  }
-  if (direction === "forward") {
-    horizontalCoor += size;
-    verticalCoor += size * aim;
+  switch (direction) {
+    case "up":
+      aim -= size;
+      break;
+    case "down":
+      aim += size;
+      break;
+    case "forward":
+      horizontalCoor += size;
+      verticalCoor += size * aim;
+      break;
   }
 }
 
