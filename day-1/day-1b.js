@@ -33,7 +33,9 @@ for (let index = 0; index < slidingArray.length; index++) {
 // /----------------------------------------------------------------------------------
 
 // why say lot word when few word do trick
+
 let totalIncreasing = 0;
+
 for (let index = 0; index < array.length; index++) {
   const element = array[index];
   if (index < 3) {
