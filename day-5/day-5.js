@@ -7,11 +7,6 @@ const lines = input.map((l) =>
   l.split("->").map((p) => p.split(",").map((x) => parseInt(x)))
 );
 
-//creating an array that will fit all our numbers - max is around 1000
-let megaArray = Array(1000)
-  .fill(0)
-  .map((x) => Array(1000).fill(0));
-
 //A range function that we can use to create an axis points
 const range = (in1, in2) => {
   const length = Math.abs(in1 - in2) + 1;
@@ -27,43 +22,61 @@ const range = (in1, in2) => {
 const verticalChecker = (input) => input[0][0] === input[1][0];
 const horizontalChecker = (input) => input[0][1] === input[1][1];
 
+// here we have a simple functin that reduces the array to only give coordinatesw that have two or more lines on the position
+const arrayCounter = (input) => {
+  return input.reduce(
+    (valibalibooboo, currRorrowow) =>
+      currRorrowow.reduce((prev, curr) => prev + (curr > 1 ? 1 : 0), 0) +
+      valibalibooboo,
+    0
+  );
+};
+
 //now we have a for loop that will go through each line in our data:
 //    - check if the coordinates give a striang (vertical|horizontal) or diagonal line
 // - work out all points the line will include
 // - add 1 to our megaArray to symbolise the line on this point
-for (let index = 0; index < lines.length; index++) {
-  const line = lines[index];
-  if (horizontalChecker(line)) {
-    let xRange = range(line[0][0], line[1][0]);
-    const y = line[0][1];
-    for (const x of xRange) {
-      megaArray[x][y] += 1;
-    }
-  } else if (verticalChecker(line)) {
-    let yRange = range(line[0][1], line[1][1]);
-    const x = line[0][0];
-    for (const y of yRange) {
-      megaArray[x][y] += 1;
-    }
-  } else {
-    let xRange = range(line[0][0], line[1][0]);
-    let yRange = range(line[0][1], line[1][1]);
-    let xyRange = xRange.map((val, idx) => [val, yRange[idx]]);
-    for ([x, y] of xyRange) {
-      megaArray[x][y] += 1;
+const overLapCounter = (lines, diagonals) => {
+  //creating an array that will fit all our numbers - max is around 1000
+  let megaArray = Array(1000)
+    .fill(0)
+    .map((x) => Array(1000).fill(0));
+
+  for (let index = 0; index < lines.length; index++) {
+    const line = lines[index];
+    if (horizontalChecker(line)) {
+      let xRange = range(line[0][0], line[1][0]);
+      const y = line[0][1];
+      for (const x of xRange) {
+        megaArray[x][y] += 1;
+      }
+    } else if (verticalChecker(line)) {
+      let yRange = range(line[0][1], line[1][1]);
+      const x = line[0][0];
+      for (const y of yRange) {
+        megaArray[x][y] += 1;
+      }
+    } else if (diagonals) {
+      let xRange = range(line[0][0], line[1][0]);
+      let yRange = range(line[0][1], line[1][1]);
+      let xyRange = xRange.map((val, idx) => [val, yRange[idx]]);
+      for ([x, y] of xyRange) {
+        megaArray[x][y] += 1;
+      }
     }
   }
-}
 
-// here we have a simple functin that reduces the array to only give coordinatesw that have two or more lines on the position
-const numberOfOverlaps = megaArray.reduce(
-  (valibalibooboo, currRorrowow) =>
-    currRorrowow.reduce((prev, curr) => prev + (curr > 1 ? 1 : 0), 0) +
-    valibalibooboo,
-  0
+  return arrayCounter(megaArray);
+};
+
+console.log(
+  "The number of overlapping vents without diagonals is:",
+  overLapCounter(lines, false)
 );
-
-console.log("The number of overlapping vents is:", numberOfOverlaps);
+console.log(
+  "The number of overlapping vents with diagonals is:",
+  overLapCounter(lines, true)
+);
 
 // // checking reduce line with longer code
 // let answer = [];
