@@ -57,7 +57,7 @@ const fuelChange = (steps) => steps * ((steps + 1) / 2);
 const crabEngineering = (crabInitialPosition, guess) =>
   fuelChange(Math.abs(crabInitialPosition - guess));
 
-// running the finder for both equations and printing our answers woo
+// running the finder for both equations and printing our answers woo!
 const partOne = pointFinder(simple);
 console.log("The best number to arrange on is:", partOne.point);
 console.log("The fuel consumption is:", partOne.fuel, "\n");
