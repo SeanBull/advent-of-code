@@ -7,6 +7,8 @@ const initialPostions = fs
   .split(",")
   .map((x) => parseInt(x));
 
+//   attempting a finder using a binary search that sets upper and lower bounds and finds the direction in which the fuel total is decreasing and then sets new upper and lower bounds based on that.
+
 // calculator that returns the total fuel usage for a meeting point, it allows you to pass in a function to represent fuel consumption equation
 const fuelCalculator = (equation, guess) => {
   totalFuel = 0;
