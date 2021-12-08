@@ -42,6 +42,7 @@ const pointFinder = (equation) => {
   };
   while (bounds.upper !== bounds.lower) {
     bounds = guessCompare(equation, bounds.upper, bounds.lower);
+    console.log(bounds);
   }
   //   returning an object with our winning point and the fuel consumption
   return {
